@@ -1,0 +1,84 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Temperature Converter</title>
+</head>
+<link rel="stylesheet" type="text/css" href="style.css">
+<body>
+
+<h1>Temperature Converter</h1>
+
+<div id="loginForm" style="display: block;">
+    <h2>Login</h2>
+    <form id="login" action="#">
+        <label for="username">Username:</label>
+        <input type="text" id="username" name="username" required><br><br>
+        
+        <label for="password">Password:</label>
+        <input type="password" id="password" name="password" required><br><br>
+        
+        <input type="button" value="Login" onclick="checkLogin()">
+    </form>
+</div>
+
+<div id="converterForm" style="display: none;">
+    <h2>Converter</h2>
+    <form id="temperatureConverter">
+        <label for="temperature">Temperature:</label>
+        <input type="number" id="temperature" name="temperature" required><br><br>
+        
+        <input type="radio" id="celsiusToFahrenheit" name="conversionType" value="celsiusToFahrenheit" required>
+        <label for="celsiusToFahrenheit">Celsius to Fahrenheit</label><br>
+        
+        <input type="radio" id="fahrenheitToCelsius" name="conversionType" value="fahrenheitToCelsius" required>
+        <label for="fahrenheitToCelsius">Fahrenheit to Celsius</label><br><br>
+        
+        <input type="button" value="Convert" onclick="convertTemperature()">
+    </form>
+    
+    <h3>Result:</h3>
+    <p id="result"></p>
+    
+    <input type="button" value="Logout" onclick="logout()">
+</div>
+
+<script>
+function checkLogin() {
+    var username = document.getElementById("username").value;
+    var password = document.getElementById("password").value;
+    
+
+    if (username === "james" && password === "password") {
+        document.getElementById("loginForm").style.display = "none";
+        document.getElementById("converterForm").style.display = "block";
+    } else {
+        alert("Login failed. Please try again.");
+    }
+}
+
+function convertTemperature() {
+    var temperature = parseFloat(document.getElementById("temperature").value);
+    var conversionType = document.querySelector('input[name="conversionType"]:checked').value;
+    
+    var result = "";
+    
+    if (conversionType === "celsiusToFahrenheit") {
+        result = (temperature * 9/5) + 32 + " degrees Fahrenheit";
+    } else if (conversionType === "fahrenheitToCelsius") {
+        result = (temperature - 32) * 5/9 + " degrees Celsius";
+    }
+    
+    document.getElementById("result").textContent = result;
+}
+
+function logout() {
+    document.getElementById("loginForm").style.display = "block";
+    document.getElementById("converterForm").style.display = "none";
+    document.getElementById("username").value = "";
+    document.getElementById("password").value = "";
+    document.getElementById("result").textContent = "";
+}
+</script>
+
+</body>
+</html>
